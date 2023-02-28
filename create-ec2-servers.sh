@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ##### Change these values ###
-ZONE_ID="Z103214126L48SQW30RSR"
+ZONE_ID="Z080164432BG98VPFPTT4"
 DOMAIN="hdevegowda.online"
-SG_NAME="allow-all"
+SG_NAME="allowAllSG"
 #############################
 
 
