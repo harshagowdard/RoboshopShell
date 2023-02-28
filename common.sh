@@ -79,8 +79,7 @@ app_prereq_setup() {
   status_check $?
 
   print_head "Downloading App Content"
-  curl -L -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${log_file}
-  status_check $?
+  curl -L -o /tmp/dispatch.zip https://roboshop-artifacts.s3.amazonaws.com/dispatch.zip  status_check $?
   cd /app
 
   print_head "Extracting App Content"
@@ -145,3 +144,21 @@ python() {
   systemd_setup
 }
 
+go() {
+
+  print_head "Install Go"
+  yum install golang -y &>>${log_file}
+  status_check $?
+
+  app_prereq_setup
+
+  print_head "Download Dependencies"
+  cd /app
+  go mod init dispatch &>>${log_file}
+  go get &>>${log_file}
+  go build &>>${log_file}
+  status_check $?
+
+  # SystemD Function
+  systemd_setup
+}
